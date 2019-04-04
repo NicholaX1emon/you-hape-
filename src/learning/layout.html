@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>css layouts</title>
+    <style>
+        /* 两列布局1 一侧固定 一侧自适应 */
+        /* 固定侧浮动或绝对定位(脱离文档流) 另一侧设置margin */
+        /* .left{
+            float: left;
+            width: 200px;
+            height: 200px;
+            background: green;
+        }
+        .right{
+            margin-left: 200px;
+            height: 200px;
+            background: red;
+        } */
+
+        /* 两列布局2 一侧固定 一侧自适应 */
+        /* 对父元素设置flex布局 自适应子元素设置flex */
+        /* body{
+            display: flex;
+            justify-content: baseline;
+        }
+        .left{
+            width: 200px;
+            height: 200px;
+            background: green;
+        }
+        .right{
+            flex: 1;
+            height: 200px;
+            background: red;
+        } */
+
+        /* 三列布局1 两侧固定 一侧自适应 */
+        /* 固定侧浮动或绝对定位(脱离文档流) 剩余一侧设置margin(chrome下需要清除浏览器默认样式) */
+        /* .left{
+            float: left;
+            width: 200px;
+            height: 200px;
+            background: green;
+        }
+        .center{
+            margin: 0 300px 0 200px;
+            height: 200px;
+            background: yellow;
+        }
+        .right{
+            float: right;
+            width: 300px;
+            height: 200px;
+            background: red;
+        } */
+
+        /* 三列布局2 两侧固定 一侧自适应 */
+        /* 对父元素设置flex布局 自适应子元素设置flex */
+        /* body{
+            display: flex;
+            justify-content: space-between;
+        }
+        .left{
+            width: 200px;
+            height: 200px;
+            background: green;
+        }
+        .center{
+            flex: 1;
+            height: 200px;
+            background: yellow;
+        }
+        .right{
+            width: 300px;
+            height: 200px;
+            background: red;
+        } */
+
+        /* 圣杯布局 分为头部 底部 中间内容区分为3块 3快中的中间块为主要内容区*/
+        /* center部分要放在container的最前块 */
+        /* 1.将三者都 float:left 再加上一个position:relative(因为相对定位后面会用到)*/
+        /* 2.center部分 width:100%占满 */
+        /* 3.此时center占满了 所以要把left拉到最左边 使用margin-left:-100% */
+        /* 4.这时left拉回来了 但会覆盖center内容的左端 要把center内容拉出来 所以在外围container加上 padding:0 300px 0 200px */
+        /* 5.center内容拉回来了 但left也跟着过来了 所以要还原 就对left使用相对定位 left:-200px 同理 right也要相对定位还原 right:-300px */
+        header{
+            background: cadetblue;
+        }
+        footer{
+            background: antiquewhite;
+        }
+        .container{
+            padding: 0 300px 0 200px;
+            overflow: hidden;
+        }
+        .left, .right, .center{
+            float: left;
+            position: relative;
+            height: 200px;
+        }
+        .left{
+            margin-left: -100%;
+            left: -200px;
+            width: 200px;
+            background: green;
+        }
+        .center{
+            width: 100%;
+            background: yellow;
+        }
+        .right{
+            margin-left: -300px;
+            right: -300px;
+            width: 300px;
+            background: red;
+        }
+
+        /* 双飞翼布局 类似于圣杯布局 不使用相对定位*/
+        /* center部分要放在container的最前块 */
+        /* 1.将三者都 float:left */
+        /* 2.center部分 width:100%占满 */
+        /* 3.此时center占满了 所以要把left拉到最左边 使用margin-left:-100% 同理 right使用margin-left:-300px*/
+        /* 4.这时会覆盖center内容 要把center内容拉出来 给main增加一个内层div-- main-inner, 然后margin:0 300px 0 200px */
+        header{
+            background: cadetblue;
+        }
+        footer{
+            background: antiquewhite;
+        }
+        .container{
+         
+        }
+        .left, .right, .center{
+            float: left;
+            height: 200px;
+        }
+        .left{
+            margin-left: -100%;
+            width: 200px;
+            background: green;
+        }
+        .center{
+            width: 100%;
+        }
+        .center-inner{ 
+            margin-left: 200px;
+            margin-right: 300px;
+            min-height: 200px;
+            background: yellow;
+        }
+        .right{
+            margin-left: -300px;
+            width: 300px;
+            background: red;
+        }
+
+    </style>
+</head>
+<body>
+    <header>我是头部</header>
+
+    <div class='container'> 
+        <div class="center">
+            <div class='center-inner'>中间中间中间中间中间</div>
+        </div>
+
+        <div class="left">
+            左边左边左边左边左边
+        </div>
+
+        <div class="right">
+            右边右边右边右边右边
+        </div>
+    </div>
+
+    <footer>我是底部</footer>
+</html>

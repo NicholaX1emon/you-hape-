@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="shortcut icon" href="./icon.jpg" type="image/x-icon" />
+    <style>
+        h1{
+            background: url('./icon.jpg') no-repeat;
+        }
+        .triangle{
+            width: 0;
+            height: 0;
+            border: 20px solid transparent;
+            border-bottom:20px solid red;
+            margin: 10px 0;
+        }
+        .Parallelogram{
+            border: 2px dashed rgb(93, 181, 211);
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 10px 0;
+            color:#333;
+            transform: skew(-20deg)
+        }
+        .Parallelogram div{
+            transform: skew(20deg);
+        }
+        .first{
+            background-color: rgb(93, 181, 211)
+        }
+        .video{
+            margin:10px 0;
+            display: block;
+        }
+        .aside{
+            float: left;
+            width: 200px;
+            height: 200px;
+            /* margin: 0 20px; */
+            background-color:lightcoral;
+        }
+        .main{
+            /* width: 400px; */
+            height: 400px; 
+            /* 设置适量margin大小取消浮动的重叠区域方式 */
+            margin: 0 0 0 240px;
+            background-color: orangered;
+            /* 生成BFC取消浮动的重叠区域 */
+            /* overflow: hidden; */
+        }
+        img{
+            max-width: 50px;
+            max-height: 50px;
+        }
+        .transStart{ 
+            background-color: yellow; 
+            -webkit-transition: background-color 5s linear; 
+            -moz-transition: background-color 5s linear; 
+            -o-transition: background-color 5s linear; 
+            transition: background-color 5s linear; 
+        } 
+        .transEnd{ 
+        background-color: red; 
+        }
+    </style>
+</head>
+<body>
+    <div class="triangle"></div>
+
+    <div class="Parallelogram first">
+         <div>
+            深圳
+        </div>
+    </div>
+    <div class="Parallelogram">
+        <div>
+            成都
+        </div>
+    </div>
+    <div class="Parallelogram">
+        <div>
+            重庆
+        </div>
+    </div>
+
+    <video class="video" src="http://v2v.cc/~j/theora_testsuite/320x240.ogg" controls loop>
+        你的浏览器不支持 <code>video</code> 标签.
+    </video>
+
+    <h2>Block Formatting Context</h2>
+    <div class='aside'></div>
+    <div class="main"></div>
+
+    <span>行内元素因浮动高度塌陷<img src="./icon.jpg">效果演示</span>
+    
+    <div id="transDiv" class="transStart"> transition </div> 
+ 
+    <script>
+        window.onload = () => {
+            setTimeout(() => {
+            let trans = document.querySelector('#transDiv')
+            trans.removeAttribute('class')
+            trans.setAttribute('class','transEnd')
+            }, 5000);
+           
+        }
+    </script>
+</body>
+</html>
+
+

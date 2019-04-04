@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>documents used to build the HTML spec</title>
+    <style></style>
+</head>
+<body>
+    <input type='text' id='input' placeholder="输入的数据也被绑定到下方"/>
+    <p id='p'></p>
+<script>
+    /*未使用观察者模式实现的双向数据绑定*/
+
+    //获取dom
+    let input = document.getElementById('input') 
+    let p = document.getElementById('p')
+    
+    //初始化view
+    p.innerHTML = '默认字段'
+
+    //viewModel
+    let data = {
+        content: '',
+    }
+
+    //input回调 ui交互时 改变viewModel
+    input.oninput = () => {
+        // p.innerHTML = input.value  单项数据流的话
+        // input.value = 'haha'       如果此时设置input value 不会马上改变ui 只能等到下一次ui交互时生效 
+        data.content = input.value
+    }
+
+    //设置viewModel属性时的回调
+    const handleInputChange = content => {
+        p.innerHTML = content
+    }
+
+    //实现双向绑定
+    Object.defineProperty(data, 'content', {
+        set: newValue => {
+            handleInputChange(newValue) // 同时将model反应到view
+            console.log('double binding')
+        }
+    })
+</script>    
+</body>
+</html>
